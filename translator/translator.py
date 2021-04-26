@@ -42,7 +42,7 @@ def translate(language, words, type):
         with open(f'{word}.txt', 'a', encoding='utf-8') as my_file:
             print(f"\n{language.capitalize()} Translations:")
             my_file.write(f"\n{language.capitalize()} Translations:\n")
-            for x in range(5):
+            for x in range(min(5, len(words))):
                 print(words[x])
                 my_file.write(words[x] + "\n")
             print(f"\n{language.capitalize()} Examples:")
@@ -70,8 +70,8 @@ if to_lang == "all":
             translations = [x.text.strip() for x in temp]
             translations.pop(0)
             if not translations:
-                print(f"Sorry, unable to find {word}")
-                break
+                print(f"Sorry, unable to find '{word}' in {to_lang.capitalize()}")
+                continue
             elif r.status_code != 200:
                 print("Something wrong with your internet connection")
                 break
